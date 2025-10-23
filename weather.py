@@ -38,35 +38,35 @@ class WeatherClass:
         self.var_localtime = StringVar()
 
         # ---- Output Labels ---- #
-        self.var_txtcity = Label(self.root, text="", font=("times 30 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_txtcity = Label(self.root, text="", font=("times 30 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_txtcity.place(x=0, y=70)
 
-        self.var_latitude_lbl = Label(self.root, text="", font=("times 12 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_latitude_lbl = Label(self.root, text="", font=("times 12 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_latitude_lbl.place(x=0, y=40)
 
-        self.var_temprature_lbl = Label(self.root, text="", font=("times 40 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_temprature_lbl = Label(self.root, text="", font=("times 40 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_temprature_lbl.place(x=20, y=120)
 
-        self.var_localtime_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#08f7f7", justify="center")
-        self.var_localtime_lbl.place(x=185, y=220, width=150)
+        self.var_localtime_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#00C9E2" ,justify="center")
+        self.var_localtime_lbl.place(x=220, y=220, width=100)
 
-        self.var_des_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_des_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_des_lbl.place(x=90, y=300)
 
-        self.var_wind_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_wind_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_wind_lbl.place(x=250, y=300)
 
-        self.var_humididty_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_humididty_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_humididty_lbl.place(x=370, y=300)
 
-        self.var_pressure_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#08f7f7", justify="center")
+        self.var_pressure_lbl = Label(self.root, text="", font=("times 14 bold"), fg="black", bg="#00C9E2", justify="center")
         self.var_pressure_lbl.place(x=500, y=300)
 
         # ----- Static Labels ------ #
-        Label(self.root, text="Description", font=("times 14 bold"), fg="white", bg="#4c7b7b").place(x=90, y=270)
-        Label(self.root, text="Wind", font=("times 14 bold"), fg="white", bg="#4c7b7b").place(x=250, y=270)
-        Label(self.root, text="Humidity", font=("times 14 bold"), fg="white", bg="#4c7b7b").place(x=370, y=270)
-        Label(self.root, text="Pressure", font=("times 14 bold"), fg="white", bg="#4c7b7b").place(x=500, y=270)
+        Label(self.root, text="Description", font=("times 14 bold"), fg="white", bg="#202930").place(x=90, y=270)
+        Label(self.root, text="Wind", font=("times 14 bold"), fg="white", bg="#202930").place(x=250, y=270)
+        Label(self.root, text="Humidity", font=("times 14 bold"), fg="white", bg="#202930").place(x=370, y=270)
+        Label(self.root, text="Pressure", font=("times 14 bold"), fg="white", bg="#202930").place(x=500, y=270)
 
         # ---- City Entry ----- #
         textfield = Entry(
@@ -150,7 +150,43 @@ class WeatherClass:
              self.var_humididty_lbl.config(text=f"{humidity}%")
              self.var_pressure_lbl.config(text=f"{pressure} hPa")
              
-             
+             #----icons-----#
+                
+            if condition == 'Rain':
+                weather_img = Image.open('icons/rain.png')
+                weather_img = weather_img.resize((50, 50), Image.LANCZOS)
+                self.weather_image = ImageTk.PhotoImage(weather_img)
+                self.weather_icon_label = Label(self.root, image=self.weather_image, bg='#202930')
+                self.weather_icon_label.place(x=450, y=100)
+
+            elif condition == 'Clouds':
+                weather_img = Image.open('icons/cloudy.png')
+                weather_img = weather_img.resize((100, 100), Image.LANCZOS)
+                self.weather_image = ImageTk.PhotoImage(weather_img)
+                self.weather_icon_label = Label(self.root, image=self.weather_image, bg='#202930')
+                self.weather_icon_label.place(x=450, y=100)
+
+            elif condition == 'Clear':
+                weather_img = Image.open('icons/cleansky.png')
+                weather_img = weather_img.resize((100, 100), Image.LANCZOS)
+                self.weather_image = ImageTk.PhotoImage(weather_img)
+                self.weather_icon_label = Label(self.root, image=self.weather_image, bg='#202930')
+                self.weather_icon_label.place(x=450, y=100)
+
+            elif condition in ['Thunderstorm', 'Lightning', 'Storm']:
+                weather_img = Image.open('icons/rain_light.png')
+                weather_img = weather_img.resize((50, 50), Image.LANCZOS)
+                self.weather_image = ImageTk.PhotoImage(weather_img)
+                self.weather_icon_label = Label(self.root, image=self.weather_image, bg='#202930')
+                self.weather_icon_label.place(x=450, y=100)
+
+            else:
+                # fallback default
+                weather_img = Image.open('icons/cleansky.png')
+                weather_img = weather_img.resize((50, 50), Image.LANCZOS)
+                self.weather_image = ImageTk.PhotoImage(weather_img)
+                self.weather_icon_label = Label(self.root, image=self.weather_image, bg='#202930')
+                self.weather_icon_label.place(x=450, y=100)
         
         except Exception as e:
             messagebox.showerror("Weather App", f"Invalid Entry...!\n{e}")
