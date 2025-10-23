@@ -109,17 +109,17 @@ Displays real-time weather data, local timezones, and weather icons in a stylish
 
   
 
-##install dependencies:
+install dependencies:
  ```bash
 pip install geopy timezonefinder pytz requests pillow
 ```
-##Obtain an API key from OpenWeatherMap
+Obtain an API key from OpenWeatherMap
 
 Run the application:
 ```bash
 python weather.py
 ```
-##📁 Project Structure
+📁 Project Structure
 ```bash
 WeatherApp_Python/
 │
